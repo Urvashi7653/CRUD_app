@@ -1,0 +1,53 @@
+<%-include("partials/header")-%>
+<%-include("partials/read_create_navbar")-%>
+<%-include("partials/about_navbar")-%>
+
+<main role="main" class="container" style ="padding: 60px 15px 0;">
+  <h1 class="mt-5">You can update the item here!</h1>
+  <p class="lead">
+    Let's do the changes now.
+  </p>
+</main>
+
+<!-- Form -->
+<form style = "width:60%; margin-left:97px" action="/update/<%=item._id%>" method="post">
+  <div class="form-group required">
+    <label >Title</label>
+    <input
+      type="text"
+      name="listTitle"
+      value="<%=item.title%>"
+      autocomplete="off"
+      class="form-control" id="exampleFormControlInput1"
+      maxlength="15"
+      required
+    />
+    
+  </div>
+  <div class="form-group required">
+    <label>Description</label>
+    <input
+      type="text"
+      name="listDesc"
+      value="<%=item.description%>"
+      autocomplete="off"
+      required ="True"
+      class="form-control" id="exampleFormControlInput1"
+      required
+    />
+  </div>
+  
+  <div class="form-group required">
+    <label >Select status</label>
+    <select value = "<%item.status%>"name = "listStatus" class="form-control" id="exampleFormControlSelect1" placeholder="Enter status">
+      <option>Not started</option>
+      <option>In progress</option>
+      <option>Done</option>
+    </select>
+  </div>
+
+  <!-- Logout button -->
+  <button style = "margin-top: 20px" type="submit" name="button" class=" btn btn-outline-secondary">Submit</button>
+</form>
+</body>
+

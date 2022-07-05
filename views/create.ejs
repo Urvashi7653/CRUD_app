@@ -1,0 +1,84 @@
+<%-include("partials/header")-%>
+<%-include("partials/read_create_navbar")-%>
+<%-include("partials/about_navbar")-%>
+
+<!-- Begin page content -->
+<main role="main" class="container">
+  <h1 class="mt-5">You can add new item here!</h1>
+  <p class="lead">Fill the given form to add new entry.</p>
+</main>
+
+<!-- Alert for express validators -->
+<%if(typeof alert!= "undefined"){%> <%alert.forEach(function(error){%>
+<div
+  style="margin-left: 97px; width: 60%"
+  class="alert alert-warning alert-dismissible"
+  role="alert"
+>
+  <strong>Oops! </strong><%=error.msg%>
+</div>
+<%})%> <%}%> <%if(typeof alert== "undefined"){%>
+<h4 style="margin-left: 100px; color: green"><%=message%></h4>
+<%}%>
+
+<!-- Form -->
+<form class="form" action="/create" method="post">
+  <div class="form-group required">
+    <label>Title</label>
+    <input
+      type="text"
+      name="listTitle"
+      value=""
+      autocomplete="off"
+      placeholder="Enter title"
+      class="form-control"
+      id="exampleFormControlInput1"
+      required
+    />
+  </div>
+
+  <div class="form-group required">
+    <label>Description</label>
+    <textarea
+      name="listDesc"
+      class="form-control"
+      id="exampleFormControlTextarea1"
+      rows="3"
+    ></textarea>
+  </div>
+
+  <div class="form-group required">
+    <label>Select status</label>
+    <select
+      name="listStatus"
+      class="form-control"
+      id="exampleFormControlSelect1"
+      placeholder="Enter status"
+    >
+      <option>Not started</option>
+      <option>In progress</option>
+      <option>Done</option>
+    </select>
+  </div>
+
+  <!-- Submit button -->
+  <button
+    placeholder="Enter description"
+    type="submit"
+    name="button"
+    class="submitButton btn btn-outline-secondary"
+  >
+    Submit
+  </button>
+</form>
+
+<!-- Logout button -->
+<a
+  class="btn btn-dark btn"
+  style="position: absolute; right: 20px; top: 60px"
+  href="/logout"
+  role="button"
+  >Log Out</a
+>
+
+<%-include("partials/footer")-%>
