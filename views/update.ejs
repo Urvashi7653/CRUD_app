@@ -9,6 +9,17 @@
   </p>
 </main>
 
+<!-- Alert for express validators -->
+<%if(typeof alert!= "undefined"){%> <%alert.forEach(function(error){%>
+  <div
+    style="margin-left: 97px; width: 60%"
+    class="alert alert-warning alert-dismissible"
+    role="alert"
+  >
+    <strong>Oops! </strong><%=error.msg%>
+  </div>
+  <%})%> <%}%> 
+
 <!-- Form -->
 <form style = "width:60%; margin-left:97px" action="/update/<%=item._id%>" method="post">
   <div class="form-group required">
@@ -19,8 +30,7 @@
       value="<%=item.title%>"
       autocomplete="off"
       class="form-control" id="exampleFormControlInput1"
-      maxlength="15"
-      required
+      
     />
     
   </div>
@@ -31,9 +41,7 @@
       name="listDesc"
       value="<%=item.description%>"
       autocomplete="off"
-      required ="True"
       class="form-control" id="exampleFormControlInput1"
-      required
     />
   </div>
   
@@ -50,4 +58,5 @@
   <button style = "margin-top: 20px" type="submit" name="button" class=" btn btn-outline-secondary">Submit</button>
 </form>
 </body>
+
 

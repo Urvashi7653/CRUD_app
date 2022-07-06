@@ -3,25 +3,40 @@ import { read } from "../controllers/operations/read.js";
 import { getCreate, postCreate } from "../controllers/operations/create.js";
 import { getUpdate, postUpdate } from "../controllers/operations/update.js";
 import { deleteItem } from "../controllers/operations/delete.js";
-import { check} from "express-validator";
+import { body} from "express-validator";
+import { Item} from "../models/item.js"
 
 const router = express.Router();
 
 router.get("/read", read);
 router.get("/create", getCreate);
-router.get("/update/:id", getUpdate);
+router.get("/update/:id",getUpdate);
 router.post(
   "/create",
   [
-    check("listTitle", "Title can have maximum 15 characters.").isLength({
+    body("listTitle", "Title can have maximum 15 characters.").isLength({
       max: 15,
     }),
-    check("listTitle", "Title must be present.").notEmpty(),
-    check("listDesc", "Description must be present").notEmpty(),
+    body("listTitle", "Title must be present.").notEmpty(),
+    body("listDesc", "Description must be present").notEmpty(),
   ],
   postCreate
 );
-router.post("/update/:id", postUpdate);
+router.post("/update/:id",  [
+  body("listTitle", "Title can have maximum 15 characters.").isLength({
+    max: 15,
+  }),
+  body("listTitle", "Title must be present.").notEmpty(),
+  body("listDesc", "Description must be present").notEmpty(),
+  body("listTitle").custom(value=>{
+    return Item.findOne({listTitle:value})
+    .then(listItem =>{
+      if(!listItem){
+        return Promise.reject("Title already in use")
+      }
+    })
+  })
+] ,postUpdate);
 router.post("/delete", deleteItem);
 
 export default router;

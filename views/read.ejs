@@ -37,18 +37,14 @@
                 type="submit"
                 style ="margin-top:5px; display:inline-block";
               >
-                Delete</button></form>
+              Delete</button></form>
         </td>
       </tr>
       <%})%>
     </tbody>
   </table>
 
-  <!-- Logout button -->
- <div class = "text-center">
-  <a class="btn btn-dark btn" style = "position: absolute; right:20px; top: 60px" href="/logout" role="button">Log Out</a>
- </div>
-</form>
-  
+<!-- Logout button -->
+<%-include("partials/logout_button")-%> 
 <%-include("partials/footer")-%>
 
